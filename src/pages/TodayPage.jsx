@@ -3,26 +3,30 @@ import { fetchWeatherToday } from 'API/fetchCurrentWeathe';
 import { CurrentWeather } from 'components/CurrentWeather/CurrentWeather';
 import { LeftBottomWraper } from 'components/LeftBottomWraper/LeftBottomWraper';
 import { NavBtn } from 'components/Navigation/NavBtn/NavBtn';
+import { Navigation } from 'components/Navigation/Navigation';
 import { Quote } from 'components/Quote/Quote';
 import { useEffect, useState } from 'react';
+import { Circles } from 'react-loader-spinner';
 import styled from 'styled-components';
 
 export const TodayPage = () => {
+  const [weatherArr, setweatherArr] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     fetchBcgImg();
   }, []);
-  const [weatherArr, setweatherArr] = useState([]);
-  const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
     const getWeather = async () => {
       const { data } = await fetchWeatherToday('Lviv');
       // return resolt;
-      setLoading(false);
       setweatherArr(data);
+      setLoading(false);
     };
     getWeather();
-    console.log(weatherArr);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // const { main, sys, name, weather } = weatherArr;
   return (
@@ -30,12 +34,9 @@ export const TodayPage = () => {
       <Section>
         <WeatherSection>
           <WeatherContetn>
-            {loading ? <CurrentWeather data={weatherArr} /> : <></>}
+            {loading ? <Circles /> : <CurrentWeather data={weatherArr} />}
           </WeatherContetn>
-
-          <NavButtons>
-            <NavBtn />
-          </NavButtons>
+          <Navigation />
         </WeatherSection>
         <SectionBottom>
           <LeftBottomWraper />
@@ -66,29 +67,14 @@ const Section = styled.div`
   }
 `;
 const SectionBottom = styled.div`
+  color: #fff;
   @media screen and (min-width: 1280px) {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 `;
-const NavButtons = styled.div`
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 32px;
-  max-width: 280px;
-  display: flex;
-  justify-content: space-between;
-  @media screen and (min-width: 768px) {
-    max-width: 336px;
-  }
-  @media screen and (min-width: 1280px) {
-    max-width: 395px;
-    margin-right: 0;
-    margin-left: auto;
-    margin-bottom: 38px;
-  }
-`;
+
 const WeatherContetn = styled.div`
   display: flex;
   flex-direction: column;

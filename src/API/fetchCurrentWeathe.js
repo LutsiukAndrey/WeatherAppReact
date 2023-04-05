@@ -15,6 +15,7 @@ export async function fetchWeatherToday(name) {
   const url = `${baseUrl}q=${name}&${searchParams}`;
   try {
     const data = await axios.get(url);
+    console.log(data);
     return data;
   } catch (error) {
     return 'lviv';

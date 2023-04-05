@@ -8,7 +8,7 @@ export const App = () => {
     <Container>
       <Routes>
         <Route path="/" element={<TodayPage />} />
-        <Route path="/" element={<FiveDaysPage />} />
+        <Route path="fiveDays" element={<FiveDaysPage />} />
       </Routes>
     </Container>
   );

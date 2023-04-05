@@ -5,34 +5,31 @@ import { fetchWeatherToday } from 'API/fetchCurrentWeathe';
 
 export const CurrentWeather = ({ data }) => {
   const { main, sys, name, weather } = data;
-  console.log(data);
+  console.log(weather);
   return (
     <>
       <Image
-        src={'http://openweathermap.org/img/wn/${weather[0]}.icon@2x.png'}
+        src={`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
         alt=""
       />
-      <p>{/* Kyiv UA {name}, {sys.country} */}</p>
+      <p>
+        {name}, {sys.country}
+      </p>
 
       <Tempreture>
-        <DegNow>
-          {/* {Math.round(main.temp)} */}
-          10
-        </DegNow>
+        <DegNow>{Math.round(main.temp)}</DegNow>
         <WeatherList>
           <Min>
             <Temp>min</Temp>
             <Deg>
-              10
-              {/* {Math.round(main.temp_min)} */}
+              {Math.round(main.temp_min)}
               <sup>o</sup>
             </Deg>
           </Min>
           <Max>
             <Temp>max</Temp>
             <Deg>
-              20
-              {/* {Math.round(main.temp_max)} */}
+              {Math.round(main.temp_max)}
               <sup>o</sup>
             </Deg>
           </Max>
