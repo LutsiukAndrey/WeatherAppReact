@@ -5,7 +5,6 @@ import { fetchWeatherToday } from 'API/fetchCurrentWeathe';
 
 export const CurrentWeather = ({ data }) => {
   const { main, sys, name, weather } = data;
-  console.log(weather);
   return (
     <>
       <Image

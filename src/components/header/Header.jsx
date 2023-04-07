@@ -9,16 +9,22 @@ import {
   GeoBtn,
 } from './Header.module';
 import { FavoritCity } from 'components/FavoritCity/FavoritCity';
+import { useState } from 'react';
 
-export const Header = () => {
+export const Header = ({ onHandleSubmit, onHandleChange }) => {
   return (
     <HeaderContainer>
       <HeaderForm>
-        <SearchForm>
+        <SearchForm onSubmit={onHandleSubmit}>
           <GeoBtn type="button">
             <GpsNotFixedIcon />
           </GeoBtn>
-          <SearchInput type="text" placeholder="Enter the city" name="query" />
+          <SearchInput
+            type="text"
+            placeholder="Enter the city"
+            name="query"
+            onInput={onHandleChange}
+          />
           <FavoriteBtn type="button">
             <StarBorderIcon />
           </FavoriteBtn>

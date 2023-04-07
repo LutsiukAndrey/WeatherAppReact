@@ -3,8 +3,8 @@ import { keys } from './keys';
 import axios from 'axios';
 const background = document.querySelector('body');
 
-export async function fetchBcgImg() {
-  const url = `https://pixabay.com/api/?key=${keys.pixabayKey}&q=weather&image_type=photo&pretty=true&page=1&safesearch=true`;
+export async function fetchBcgImg(city) {
+  const url = `https://pixabay.com/api/?key=${keys.pixabayKey}&q=${city}&image_type=photo&pretty=true&page=1&safesearch=true`;
   try {
     const { data } = await axios.get(url);
 

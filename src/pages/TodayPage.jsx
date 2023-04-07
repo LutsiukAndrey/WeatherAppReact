@@ -8,35 +8,18 @@ import { Quote } from 'components/Quote/Quote';
 import { useEffect, useState } from 'react';
 import { Circles } from 'react-loader-spinner';
 import styled from 'styled-components';
+import { FiveDaysPage } from './FiveDaysPage';
 
-export const TodayPage = () => {
-  const [weatherArr, setweatherArr] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchBcgImg();
-  }, []);
-  useEffect(() => {
-    setLoading(true);
-    const getWeather = async () => {
-      const { data } = await fetchWeatherToday('Lviv');
-      // return resolt;
-      setweatherArr(data);
-      setLoading(false);
-    };
-    getWeather();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+export const TodayPage = ({ data, onSelectBtn }) => {
   // const { main, sys, name, weather } = weatherArr;
   return (
     <>
       <Section>
         <WeatherSection>
           <WeatherContetn>
-            {loading ? <Circles /> : <CurrentWeather data={weatherArr} />}
+            <CurrentWeather data={data} />
           </WeatherContetn>
-          <Navigation />
+          <Navigation onSelectBtn={onSelectBtn} />
         </WeatherSection>
         <SectionBottom>
           <LeftBottomWraper />

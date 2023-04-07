@@ -11,11 +11,10 @@ const searchParams = new URLSearchParams({
   appid: weaterKey,
 });
 
-export async function fetchWeatherToday(name) {
+export async function fetchCurrentToday(name) {
   const url = `${baseUrl}q=${name}&${searchParams}`;
   try {
     const data = await axios.get(url);
-    console.log(data);
     return data;
   } catch (error) {
     return 'lviv';
