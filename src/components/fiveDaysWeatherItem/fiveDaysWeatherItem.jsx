@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
-export const FiveDaysWeatherItem = ({ data }) => {
+export const FiveDaysWeatherItem = ({ data, onMoreClick, index }) => {
   const { dayName, monthName, dayNum, tempreture, icon } = data;
-
   return (
     <FiveDaysItem>
       <DayName>{dayName}</DayName>
@@ -23,7 +22,7 @@ export const FiveDaysWeatherItem = ({ data }) => {
           </li>
         </MinOrMax>
       </div>
-      <MoreInfo type="button" id="${index - 1}">
+      <MoreInfo type="button" id={index} onClick={onMoreClick}>
         more info
       </MoreInfo>
     </FiveDaysItem>

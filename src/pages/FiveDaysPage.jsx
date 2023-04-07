@@ -1,13 +1,18 @@
 import { Navigation } from 'components/Navigation/Navigation';
 import { FiveDaysWeatherItem } from 'components/fiveDaysWeatherItem/fiveDaysWeatherItem';
-import { test } from 'API/test';
+
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
-import { fetcFiveDaysWeather } from 'API/fetcFiveDaysWeather';
-import { Circles } from 'react-loader-spinner';
+import { useState } from 'react';
+
 import nanoId from 'nano-id';
 import { DetailsItem } from 'components/DetailsItem/DetailsItem';
 export const FiveDaysPage = ({ arr, onSelectBtn }) => {
+  const [showMore, setShowMore] = useState(false);
+  const [index, setIndex] = useState(0);
+  const onMoreClick = event => {
+    setIndex(event.target.id);
+    setShowMore(!showMore);
+  };
   return (
     <section className="five-days-section">
       <Navigation onSelectBtn={onSelectBtn} />
@@ -18,26 +23,37 @@ export const FiveDaysPage = ({ arr, onSelectBtn }) => {
         <Slider>
           <WeatherList>
             {arr.weatherFiveDays.map(data => {
-              return <FiveDaysWeatherItem key={nanoId()} data={data} />;
+              return (
+                <FiveDaysWeatherItem
+                  index={arr.weatherFiveDays.indexOf(data)}
+                  key={nanoId()}
+                  data={data}
+                  onMoreClick={onMoreClick}
+                />
+              );
             })}
           </WeatherList>
         </Slider>
 
-        <SliderBtns>
+        {/* <SliderBtns>
           <SliderBtn>
             <img src="./images/prev.png" className="prev" alt="" />
           </SliderBtn>
           <SliderBtn>
             <img src="./images/next.png" className="next" alt="" />
           </SliderBtn>
-        </SliderBtns>
-        <DetailedList>
-          <MoreList>
-            {arr.weatherFiveDays[0].forecast.map(data => {
-              return <DetailsItem key={nanoId()} data={data} />;
-            })}
-          </MoreList>
-        </DetailedList>
+        </SliderBtns> */}
+        {showMore ? (
+          <DetailedList>
+            <MoreList>
+              {arr.weatherFiveDays[index].forecast.map(data => {
+                return <DetailsItem key={nanoId()} data={data} />;
+              })}
+            </MoreList>
+          </DetailedList>
+        ) : (
+          <></>
+        )}
       </FiveDaysWeather>
     </section>
   );
@@ -49,7 +65,6 @@ const WeatherList = styled.ul`
   gap: 17px;
   left: 0;
   transition: all ease 1.5s;
-  // padding: 0px 25px;
   margin-bottom: 20px;
   @media screen and (min-width: 768px) {
     gap: 24px;

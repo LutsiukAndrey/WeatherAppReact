@@ -9,67 +9,62 @@ import { Circles } from 'react-loader-spinner';
 import { fetcFiveDaysWeather } from 'API/fetcFiveDaysWeather';
 
 export const App = () => {
-  const [weatherArr, setweatherArr] = useState([]);
   const [city, setCity] = useState('Kyiv');
-  const [isLoading, setIsLoading] = useState(true);
-  const [arr, setArr] = useState(null);
   const [inputValue, setInputValue] = useState(null);
-  const [selectBtn, setSelectBtn] = useState('Today');
+  const [weatherTodayArr, setweatherTodayArr] = useState([]);
+  const [weatherFiveDaysArr, setWeatherFiveDaysArr] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectBtn, setSelectBtn] = useState('TODAY');
 
   const onHandleSubmit = event => {
     event.preventDefault();
     if (inputValue) {
       setCity(inputValue);
-      console.log(inputValue);
     }
+
     event.target.query.value = '';
-    console.log(event.target.query.value);
-    console.log(inputValue);
     return;
   };
+
   const onHandleChange = event => {
     setInputValue(event.target.value);
   };
 
   const onSelectBtn = event => {
     setSelectBtn(event.target.textContent);
-    console.log('sadfsadf');
   };
+
   useEffect(() => {
     fetchBcgImg(city);
     setIsLoading(true);
-    const getWeather = async () => {
+    const getWeatherToday = async () => {
       const { data } = await fetchCurrentToday(city);
-      setweatherArr(data);
+      setweatherTodayArr(data);
       setIsLoading(false);
     };
-    getWeather();
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [city]);
-  useEffect(() => {
-    setIsLoading(true);
-    const getWeather = async () => {
+    const getWeatherFiveDays = async () => {
       const data = await fetcFiveDaysWeather(city);
-      // return resolt;
-      setArr(data);
+      setWeatherFiveDaysArr(data);
       setIsLoading(false);
     };
-    getWeather();
-  }, [city]);
+
+    getWeatherToday();
+
+    getWeatherFiveDays();
+  }, [city, selectBtn]);
 
   return (
     <Container>
       <Header onHandleSubmit={onHandleSubmit} onHandleChange={onHandleChange} />
-
       {isLoading ? (
         <Circles />
       ) : (
         <>
           {selectBtn === 'TODAY' ? (
-            <TodayPage data={weatherArr} onSelectBtn={onSelectBtn} />
+            <TodayPage data={weatherTodayArr} onSelectBtn={onSelectBtn} />
           ) : (
-            <FiveDaysPage arr={arr} onSelectBtn={onSelectBtn} />
+            <FiveDaysPage arr={weatherFiveDaysArr} onSelectBtn={onSelectBtn} />
           )}
         </>
       )}
