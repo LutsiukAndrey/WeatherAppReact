@@ -44,10 +44,7 @@ export const App = () => {
 
   return (
     <Container>
-      <Header
-        onChangeSity={onChangeSity}
-        // onHandleChange={onHandleChange}
-      />
+      <Header onChangeSity={onChangeSity} />
       {isLoading ? (
         <Circles />
       ) : (
@@ -62,3 +59,4 @@ export const App = () => {
     </Container>
   );
 };
+// TODO падает при вводе абракадабры

@@ -16,7 +16,5 @@ export async function fetchCurrentToday(name) {
   try {
     const data = await axios.get(url);
     return data;
-  } catch (error) {
-    return 'lviv';
-  }
+  } catch (error) {}
 }

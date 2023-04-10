@@ -1,7 +1,4 @@
 import styled from 'styled-components';
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { fetchWeatherToday } from 'API/fetchCurrentWeathe';
 
 export const CurrentWeather = ({ data }) => {
   const { main, sys, name, weather } = data;

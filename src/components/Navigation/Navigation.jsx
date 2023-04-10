@@ -1,6 +1,5 @@
 import { NavButtons } from './Navigation.module';
 import { NavBtn } from './NavBtn/NavBtn';
-import { useRef } from 'react';
 
 export const Navigation = ({ onSelectBtn }) => {
   return (
