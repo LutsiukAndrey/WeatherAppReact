@@ -29,6 +29,8 @@ export const FiveDaysWeatherItem = ({ data, onMoreClick, index }) => {
   );
 };
 const FiveDaysItem = styled.li`
+  opacity: 0.8;
+
   min-width: 62px;
   display: flex;
   flex-direction: column;
@@ -39,7 +41,6 @@ const FiveDaysItem = styled.li`
   }
   @media screen and (min-width: 1280px) {
     min-width: 181px;
-    padding: 0 5px;
   }
 `;
 const DayName = styled.h3`
@@ -110,13 +111,17 @@ const Deg = styled.p`
   color: rgba(255, 107, 9, 1);
   font-size: 14px;
   line-height: 17px;
+  margin-bottom: 4px;
+
   @media screen and (min-width: 768px) {
     font-size: 18px;
     line-height: 22px;
+    margin-bottom: 16px;
   }
   @media screen and (min-width: 1280px) {
     font-size: 25px;
     line-height: 30px;
+    margin-bottom: 4px;
   }
 `;
 const MoreInfo = styled.button`

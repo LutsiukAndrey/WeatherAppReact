@@ -10,28 +10,16 @@ import { fetcFiveDaysWeather } from 'API/fetcFiveDaysWeather';
 
 export const App = () => {
   const [city, setCity] = useState('Kyiv');
-  const [inputValue, setInputValue] = useState(null);
-  const [weatherTodayArr, setweatherTodayArr] = useState([]);
+  const [weatherTodayArr, setweatherTodayArr] = useState(null);
   const [weatherFiveDaysArr, setWeatherFiveDaysArr] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [selectBtn, setSelectBtn] = useState('TODAY');
 
-  const onHandleSubmit = event => {
-    event.preventDefault();
-    if (inputValue) {
-      setCity(inputValue);
-    }
-
-    event.target.query.value = '';
-    return;
-  };
-
-  const onHandleChange = event => {
-    setInputValue(event.target.value);
-  };
-
   const onSelectBtn = event => {
     setSelectBtn(event.target.textContent);
+  };
+  const onChangeSity = name => {
+    setCity(name);
   };
 
   useEffect(() => {
@@ -56,7 +44,10 @@ export const App = () => {
 
   return (
     <Container>
-      <Header onHandleSubmit={onHandleSubmit} onHandleChange={onHandleChange} />
+      <Header
+        onChangeSity={onChangeSity}
+        // onHandleChange={onHandleChange}
+      />
       {isLoading ? (
         <Circles />
       ) : (

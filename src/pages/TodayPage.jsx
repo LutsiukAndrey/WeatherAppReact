@@ -1,17 +1,10 @@
-import { fetchBcgImg } from 'API/fetchBacgroundImage';
-import { fetchWeatherToday } from 'API/fetchCurrentWeathe';
 import { CurrentWeather } from 'components/CurrentWeather/CurrentWeather';
 import { LeftBottomWraper } from 'components/LeftBottomWraper/LeftBottomWraper';
-import { NavBtn } from 'components/Navigation/NavBtn/NavBtn';
 import { Navigation } from 'components/Navigation/Navigation';
 import { Quote } from 'components/Quote/Quote';
-import { useEffect, useState } from 'react';
-import { Circles } from 'react-loader-spinner';
 import styled from 'styled-components';
-import { FiveDaysPage } from './FiveDaysPage';
 
 export const TodayPage = ({ data, onSelectBtn }) => {
-  // const { main, sys, name, weather } = weatherArr;
   return (
     <>
       <Section>
@@ -29,6 +22,7 @@ export const TodayPage = ({ data, onSelectBtn }) => {
     </>
   );
 };
+
 const Section = styled.div`
   padding-bottom: 32px;
   margin: 0 auto;

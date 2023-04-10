@@ -22,74 +22,95 @@ export const DetailsItem = ({ data }) => {
         src={`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
       />
       <Tempreture>{Math.round(main.temp)}</Tempreture>
-      <Speed>
-        <Img
-          src="https://cdn-icons-png.flaticon.com/512/2770/2770339.png"
-          alt=""
-        />
-        {main.pressure}mm
-      </Speed>
-      <Humidity>
-        <Img
-          src="https://cdn-icons-png.flaticon.com/512/8923/8923419.png"
-          alt=""
-        />
-        {main.humidity}%
-      </Humidity>
-      <Wind>
-        <Img
-          src="https://cdn-icons-png.flaticon.com/512/615/615486.png"
-          alt=""
-        />
-        {wind.speed} m/s
-      </Wind>
+      <WeatherDesc>
+        <Speed>
+          <Img
+            src="https://cdn-icons-png.flaticon.com/512/2770/2770339.png"
+            alt=""
+          />
+          {main.pressure}mm
+        </Speed>
+        <Humidity>
+          <Img
+            src="https://cdn-icons-png.flaticon.com/512/8923/8923419.png"
+            alt=""
+          />
+          {main.humidity}%
+        </Humidity>
+        <Wind>
+          <Img
+            src="https://cdn-icons-png.flaticon.com/512/615/615486.png"
+            alt=""
+          />
+          {wind.speed} m/s
+        </Wind>
+      </WeatherDesc>
     </Item>
   );
 };
 
 const Item = styled.li`
+  &:not(:last-child) {
+    margin-right: 8px;
+    @media screen and (min-width: 1280px) {
+      margin-right: 18px;
+    }
+  }
+  padding-top: 8px;
+
   list-style: none;
-  min-width: 120px;
-  padding: 20px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  min-width: 128px;
+  height: 220px;
+  font-size: 14px;
+  text-align: center;
+  color: #ffffff8a;
+  border: 1px solid #ffffff8a;
   border-radius: 25px;
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: rgba(255, 255, 255, 0.1);
+    border: 0;
+  }
+  @media screen and (min-width: 768px) {
+    min-width: 120px;
   }
   @media screen and (min-width: 1280px) {
-    padding: 20px 32px;
     min-width: 152px;
+    margin: 0;
+    padding-top: 4px;
   }
 `;
-const Time = styled.p`
-  margin-bottom: 10px;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  text-align: center;
-  opacity: 0.54;
-`;
-const Image = styled.img`
-  width: 35px;
-  height: 35px;
-  margin-left: auto;
-  margin-right: auto;
-`;
-const Tempreture = styled.p`
-  margin-bottom: 10px;
 
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  color: #ff6b09;
-  text-align: center;
+const Time = styled.p`
+  font-size: 12px;
+  line-height: 1.833;
+  margin-top: 15px;
+`;
+
+const Image = styled.img`
+  margin: 0 auto;
+  width: 60px;
+  height: 60px;
   @media screen and (min-width: 1280px) {
     font-size: 25px;
-    line-height: 30px;
+    margin-bottom: 10px;
   }
 `;
-const Speed = styled.p`
+const Tempreture = styled.p`
+  font-size: 18px;
+  color: #ff6b08;
+  line-height: 1.222;
+  margin-bottom: 15px;
+  @media screen and (min-width: 1280px) {
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
+`;
+const WeatherDesc = styled.ul`
+  text-align: left;
+  list-style: none;
+  padding-left: 12px;
+`;
+const Speed = styled.li`
   margin-bottom: 4px;
   display: flex;
 
@@ -101,7 +122,7 @@ const Speed = styled.p`
 
   opacity: 0.54;
 `;
-const Humidity = styled.p`
+const Humidity = styled.li`
   margin-bottom: 4px;
   display: flex;
 
@@ -113,7 +134,7 @@ const Humidity = styled.p`
 
   opacity: 0.54;
 `;
-const Wind = styled.p`
+const Wind = styled.li`
   display: flex;
 
   align-items: center;
