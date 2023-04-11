@@ -1,34 +1,6 @@
-import styled from 'styled-components';
+const { default: styled } = require('styled-components');
 
-export const FiveDaysWeatherItem = ({ data, onMoreClick, index }) => {
-  const { dayName, monthName, dayNum, tempreture, icon } = data;
-  return (
-    <FiveDaysItem>
-      <DayName>{dayName}</DayName>
-      <Date>
-        <span className="date-num">{dayNum} </span>
-        <span className="date-name">{monthName}</span>
-      </Date>
-      <Image src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
-      <div className="fiveDays__tempreture">
-        <MinOrMax>
-          <Min>
-            <p className="fiveDays__list-temp">min</p>
-            <Deg>{tempreture.tempMin}</Deg>
-          </Min>
-          <li className="fiveDays__weather__list-max">
-            <p className="fiveDays__list-temp">max</p>
-            <Deg>{tempreture.tempMax}</Deg>
-          </li>
-        </MinOrMax>
-      </div>
-      <MoreInfo type="button" id={index} onClick={onMoreClick}>
-        more info
-      </MoreInfo>
-    </FiveDaysItem>
-  );
-};
-const FiveDaysItem = styled.li`
+export const FiveDaysItem = styled.li`
   opacity: 0.8;
 
   min-width: 62px;
@@ -43,7 +15,7 @@ const FiveDaysItem = styled.li`
     min-width: 181px;
   }
 `;
-const DayName = styled.h3`
+export const DayName = styled.h3`
   color: rgba(118, 125, 133, 1);
   font-weight: 400;
   font-size: 12px;
@@ -58,7 +30,7 @@ const DayName = styled.h3`
     line-height: 22px;
   }
 `;
-const Date = styled.p`
+export const Date = styled.p`
   color: #fff;
   font-weight: 400;
   font-size: 16px;
@@ -75,7 +47,7 @@ const Date = styled.p`
     margin-bottom: 20px;
   }
 `;
-const Image = styled.img`
+export const Image = styled.img`
   margin-bottom: 4px;
   margin-left: auto;
   margin-right: auto;
@@ -85,7 +57,7 @@ const Image = styled.img`
     margin-bottom: 30px;
   }
 `;
-const MinOrMax = styled.ul`
+export const MinOrMax = styled.ul`
   display: flex;
   color: rgba(118, 125, 133, 1);
   font-size: 12px;
@@ -99,7 +71,7 @@ const MinOrMax = styled.ul`
     line-height: 22px;
   }
 `;
-const Min = styled.li`
+export const Min = styled.li`
   margin-right: 10px;
   @media screen and (min-width: 768px) {
   }
@@ -107,7 +79,7 @@ const Min = styled.li`
     margin-right: 32px;
   }
 `;
-const Deg = styled.p`
+export const Deg = styled.p`
   color: rgba(255, 107, 9, 1);
   font-size: 14px;
   line-height: 17px;
@@ -124,7 +96,7 @@ const Deg = styled.p`
     margin-bottom: 4px;
   }
 `;
-const MoreInfo = styled.button`
+export const MoreInfo = styled.button`
   color: rgba(118, 125, 133, 1);
   background-color: transparent;
   border: transparent;

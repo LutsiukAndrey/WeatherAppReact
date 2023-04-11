@@ -1,29 +1,6 @@
-import { CurrentWeather } from 'components/CurrentWeather/CurrentWeather';
-import { LeftBottomWraper } from 'components/LeftBottomWraper/LeftBottomWraper';
-import { Navigation } from 'components/Navigation/Navigation';
-import { Quote } from 'components/Quote/Quote';
 import styled from 'styled-components';
 
-export const TodayPage = ({ data, onSelectBtn }) => {
-  return (
-    <>
-      <Section>
-        <WeatherSection>
-          <WeatherContetn>
-            <CurrentWeather data={data} />
-          </WeatherContetn>
-          <Navigation onSelectBtn={onSelectBtn} />
-        </WeatherSection>
-        <SectionBottom>
-          <LeftBottomWraper />
-          <Quote />
-        </SectionBottom>
-      </Section>
-    </>
-  );
-};
-
-const Section = styled.div`
+export const Section = styled.div`
   padding-bottom: 32px;
   margin: 0 auto;
   max-width: 480px;
@@ -43,7 +20,7 @@ const Section = styled.div`
     min-width: 100%;
   }
 `;
-const SectionBottom = styled.div`
+export const SectionBottom = styled.div`
   color: #fff;
   @media screen and (min-width: 1280px) {
     display: flex;
@@ -52,7 +29,7 @@ const SectionBottom = styled.div`
   }
 `;
 
-const WeatherContetn = styled.div`
+export const WeatherContetn = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -70,7 +47,7 @@ const WeatherContetn = styled.div`
     border-radius: 32px 0 0 32px;
   }
 `;
-const WeatherSection = styled.div`
+export const WeatherSection = styled.div`
   margin-bottom: 32px;
   max-width: 280px;
   margin-left: auto;

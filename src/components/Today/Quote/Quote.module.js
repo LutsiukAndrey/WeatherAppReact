@@ -1,17 +1,6 @@
 import styled from 'styled-components';
 
-export const Quote = () => {
-  return (
-    <SectionQuote>
-      <QuoteText>
-        Who cares about the clouds when we're together? Just sing a song and
-        bring the sunny weather.
-      </QuoteText>
-      <QuoteAuthor>Dale Evans</QuoteAuthor>
-    </SectionQuote>
-  );
-};
-const SectionQuote = styled.div`
+export const SectionQuote = styled.div`
   margin-left: auto;
   margin-right: auto;
   max-width: 260px;
@@ -25,7 +14,7 @@ const SectionQuote = styled.div`
     min-width: 395px;
   }
 `;
-const QuoteText = styled.p`
+export const QuoteText = styled.p`
   text-align: end;
   font-style: italic;
   font-size: 14px;
@@ -41,7 +30,7 @@ const QuoteText = styled.p`
   }
 `;
 
-const QuoteAuthor = styled.p`
+export const QuoteAuthor = styled.p`
   font-size: 18px;
   line-height: 22px;
   text-align: end;

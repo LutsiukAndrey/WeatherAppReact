@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'components/Container/Container';
 import { Header } from 'components/header/Header';
-import { TodayPage } from 'pages/TodayPage';
-import { FiveDaysPage } from 'pages/FiveDaysPage';
+import { Today } from 'components/Today/Today';
+import { FiveDays } from 'components/FiveDays/FiveDays';
 import { fetchBcgImg } from 'API/fetchBacgroundImage';
 import { fetchCurrentToday } from 'API/fetchCurrentWeathe';
 import { Circles } from 'react-loader-spinner';
@@ -40,7 +40,7 @@ export const App = () => {
     getWeatherToday();
 
     getWeatherFiveDays();
-  }, [city, selectBtn]);
+  }, [city]);
 
   return (
     <Container>
@@ -50,13 +50,12 @@ export const App = () => {
       ) : (
         <>
           {selectBtn === 'TODAY' ? (
-            <TodayPage data={weatherTodayArr} onSelectBtn={onSelectBtn} />
+            <Today data={weatherTodayArr} onSelectBtn={onSelectBtn} />
           ) : (
-            <FiveDaysPage arr={weatherFiveDaysArr} onSelectBtn={onSelectBtn} />
+            <FiveDays arr={weatherFiveDaysArr} onSelectBtn={onSelectBtn} />
           )}
         </>
       )}
     </Container>
   );
 };
-// TODO падает при вводе абракадабры

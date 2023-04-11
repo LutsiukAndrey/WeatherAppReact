@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 const FavoritCityButton = styled.button`
+  max-width: 130px;
   display: flex;
   align-items: center;
   border-radius: 20px;
@@ -11,19 +12,16 @@ const FavoritCityButton = styled.button`
   line-height: 14px;
   font-family: Lato;
   font-weight: 400;
+
   &:hover,
   &:focus {
     background-color: #fff;
     color: #000;
   }
 
-  &:not(:last-child) {
-    margin-right: 10px;
-  }
-  &:first-child {
-    margin-left: 32px;
-  }
   @include tablet {
+    max-width: 110px;
+
     font-size: 14px;
     line-height: 17px;
   }

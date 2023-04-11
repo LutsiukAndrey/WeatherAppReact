@@ -8,9 +8,10 @@ import {
   FavoriteBtn,
   GeoBtn,
 } from './Header.module';
-import { FavoritCity } from 'components/FavoritCity/FavoritCity';
+import { FavoritCity } from 'components/header/FavoritCity/FavoritCity';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { geoLocationByCoords } from 'API/fetchLocationByCoords';
 
 export const Header = ({ onChangeSity }) => {
   const [inputValue, setInputValue] = useState('');
@@ -54,6 +55,15 @@ export const Header = ({ onChangeSity }) => {
     setCity(name);
     setInputValue(name);
   };
+  const onGeoClick = s => {
+    navigator.geolocation.getCurrentPosition(async ({ coords }) => {
+      const { latitude, longitude } = coords;
+
+      const resolt = await geoLocationByCoords(latitude, longitude);
+      setCity(resolt);
+      setInputValue(resolt);
+    });
+  };
   useEffect(() => {
     localStorage.setItem('FavoritCitys', JSON.stringify(favoritCitys));
   }, [favoritCitys]);
@@ -61,12 +71,13 @@ export const Header = ({ onChangeSity }) => {
   useEffect(() => {
     onChangeSity(city);
   }, [city, onChangeSity]);
+
   return (
     <HeaderContainer>
       <HeaderForm>
         <SearchForm onSubmit={onSubmit}>
           <GeoBtn type="button">
-            <GpsNotFixedIcon />
+            <GpsNotFixedIcon onClick={onGeoClick} color="primary" />
           </GeoBtn>
           <SearchInput
             value={inputValue}

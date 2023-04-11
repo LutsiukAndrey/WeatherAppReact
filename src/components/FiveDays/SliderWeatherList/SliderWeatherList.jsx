@@ -1,8 +1,9 @@
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import styled from 'styled-components';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { Slider, SliderBtn } from './SliderWeatherList.module';
+import { SliderBtns } from '../FiveDays.module';
 export const SliderWeatherList = ({ children, cb }) => {
   const [offset, setOffset] = useState(0);
 
@@ -38,32 +39,3 @@ export const SliderWeatherList = ({ children, cb }) => {
     </>
   );
 };
-const Slider = styled.div`
-  overflow: hidden;
-
-  width: 220px;
-  margin-left: auto;
-  margin-right: auto;
-  @media screen and (min-width: 768px) {
-    width: 100%;
-  }
-  @media screen and (min-width: 1280px) {
-    width: 100%;
-  }
-`;
-const SliderBtns = styled.div`
-  display: flex;
-  justify-content: space-between;
-  background-color: transparent;
-  @media screen and (min-width: 768px) {
-    position: absolute;
-    visibility: hidden;
-    width: 1px;
-    top: 0;
-    left: 0;
-  }
-`;
-const SliderBtn = styled.button`
-  background-color: transparent;
-  border: transparent;
-`;

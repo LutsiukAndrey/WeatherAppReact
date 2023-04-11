@@ -1,15 +1,7 @@
-import { DateNow } from 'components/DateNow/DateNow';
-import { SunTime } from 'components/SunTime/SunTime';
 import styled from 'styled-components';
-export const LeftBottomWraper = () => {
-  return (
-    <Wraper>
-      <DateNow />
-      <SunTime />
-    </Wraper>
-  );
-};
-const Wraper = styled.div`
+
+export const Wraper = styled.div`
+  box-sizing: border-box;
   color: #fff;
   margin-left: auto;
   margin-right: auto;
