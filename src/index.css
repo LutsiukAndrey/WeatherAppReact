@@ -11,6 +11,7 @@ body {
   background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Moench_2339.jpg/1200px-Moench_2339.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
 code {
@@ -46,4 +47,10 @@ a {
 button {
   cursor: pointer;
   font-family: inherit;
+}
+* {
+  box-sizing: border-box;
+}
+.recharts-legend-item {
+  cursor: pointer;
 }

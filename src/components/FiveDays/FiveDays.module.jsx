@@ -1,6 +1,8 @@
 const { default: styled } = require('styled-components');
 
-export const Section = styled.section``;
+export const Section = styled.section`
+  /* margin-bottom: 90px; */
+`;
 export const WeatherList = styled.ul`
   position: relative;
 
@@ -31,6 +33,7 @@ export const FiveDaysWeather = styled.div`
   width: 270px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 20px;
 
   @media screen and (min-width: 768px) {
     width: 704px;
@@ -91,4 +94,24 @@ export const Items = styled.ul`
   left: 0;
   display: flex;
   padding-bottom: 20px;
+`;
+export const ShowChartBtn = styled.button`
+  color: #ff6b09;
+  background-color: transparent;
+  border: transparent;
+  text-decoration: underline;
+  font-size: 12px;
+  line-height: 14px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  &:hover,
+  &:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+  @media screen and (min-width: 768px) {
+    font-size: 14px;
+    line-height: 16px;
+  }
 `;

@@ -1,7 +1,6 @@
 import { Navigation } from 'components/Navigation/Navigation';
 import { FiveDaysWeatherItem } from 'components/FiveDays/fiveDaysWeatherItem/fiveDaysWeatherItem';
 
-import styled from 'styled-components';
 import { useState } from 'react';
 
 import nanoId from 'nano-id';
@@ -15,19 +14,24 @@ import {
   FiveDaysWeather,
   Items,
   Section,
+  ShowChartBtn,
   SliderBtns,
   Title,
   WeatherList,
 } from './FiveDays.module';
+import { Chart } from './Chart/Chart';
 
 export const FiveDays = ({ arr, onSelectBtn }) => {
   const mob = window.innerWidth <= 768;
   const tablet = window.innerWidth > 768 && window.innerWidth < 1279;
   const desctop = window.innerWidth > 1279;
+
   const [offset, setOffset] = useState(0);
   const [showMore, setShowMore] = useState(false);
   const [index, setIndex] = useState(0);
   const [weatherListOffset, setWeatherListOffset] = useState(0);
+  const [openChart, setOpenChart] = useState(false);
+
   const onMoreClick = event => {
     setIndex(event.target.id);
     if (index !== event.target.id) {
@@ -127,6 +131,14 @@ export const FiveDays = ({ arr, onSelectBtn }) => {
           <></>
         )}
       </FiveDaysWeather>
+      {openChart || (
+        <ShowChartBtn onClick={() => setOpenChart(!openChart)}>
+          Show charts
+        </ShowChartBtn>
+      )}
+      {!openChart || (
+        <Chart setOpenChart={setOpenChart} openChart={openChart} data={arr} />
+      )}
     </Section>
   );
 };

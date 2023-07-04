@@ -7,6 +7,7 @@ import { fetchBcgImg } from 'API/fetchBacgroundImage';
 import { fetchCurrentToday } from 'API/fetchCurrentWeathe';
 import { Circles } from 'react-loader-spinner';
 import { fetcFiveDaysWeather } from 'API/fetcFiveDaysWeather';
+import { keys } from 'API/keys';
 
 export const App = () => {
   const [city, setCity] = useState('Kyiv');
