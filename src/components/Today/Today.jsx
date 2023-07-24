@@ -16,7 +16,9 @@ export const Today = ({ data, onSelectBtn }) => {
         <WeatherSection>
           <WeatherContetn>
             {!data ? (
-              <h3 style={{ color: '#fff' }}>City is not found</h3>
+              <h3 style={{ color: '#fff' }}>
+                Please, turn on geo or enter something
+              </h3>
             ) : (
               <CurrentWeather data={data} />
             )}
