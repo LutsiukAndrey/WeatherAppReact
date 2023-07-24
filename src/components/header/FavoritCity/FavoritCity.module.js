@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 const FavoritCityButton = styled.button`
-  max-width: 130px;
+  position: relative;
   display: flex;
   align-items: center;
+  max-width: 120px;
   border-radius: 20px;
-  padding: 5px 12px;
+  padding: 5px 4px;
   background-color: rgba(16, 33, 54, 0.5);
   border: transparent;
   color: #fff;

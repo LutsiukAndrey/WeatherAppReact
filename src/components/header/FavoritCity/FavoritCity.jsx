@@ -7,14 +7,15 @@ import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 
 export const FavoritCity = ({
+  setFavoritCitys,
   favoritCitysArr,
   onFavoritCityClick,
-  onDeleteClick,
 }) => {
-  const settings = {
+  const favoritButtonsSettings = {
+    // centerPadding: 20,
     infinite: false,
     speed: 500,
-    slidesToShow: 7,
+    slidesToShow: 6,
     slidesToScroll: 1,
     swipeToSlide: true,
 
@@ -22,7 +23,7 @@ export const FavoritCity = ({
       {
         breakpoint: 1280,
         settings: {
-          slidesToShow: 6,
+          slidesToShow: 5,
         },
       },
       {
@@ -33,9 +34,21 @@ export const FavoritCity = ({
       },
     ],
   };
+
+  const onDeleteClick = name => {
+    const updatedFavoritCitysArr = favoritCitysArr.filter(
+      cityName => cityName !== name
+    );
+    localStorage.setItem(
+      'FavoritCitys',
+      JSON.stringify(updatedFavoritCitysArr)
+    );
+    setFavoritCitys(updatedFavoritCitysArr);
+  };
+
   return (
     <>
-      <Slider {...settings}>
+      <Slider {...favoritButtonsSettings}>
         {favoritCitysArr.map(name => {
           return (
             <FavoritCityButton
@@ -46,10 +59,22 @@ export const FavoritCity = ({
             >
               {name}
               <ClearIcon
-                onClick={() => {
+                onClick={e => {
+                  e.stopPropagation();
                   onDeleteClick(name);
                 }}
-                sx={{ fontSize: '10px', marginLeft: 1 }}
+                sx={{
+                  fontSize: '15px',
+                  position: 'absolute',
+                  top: '50%',
+                  right: '5px',
+                  transform: 'translate(-50%, -50%)',
+                  '&:hover': {
+                    cursor: 'pointer',
+                    color: '#FF6B09',
+                  },
+                  // transform: 'transla'
+                }}
               />
             </FavoritCityButton>
           );

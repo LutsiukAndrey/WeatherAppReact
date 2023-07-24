@@ -5,79 +5,80 @@ import {
   HeaderForm,
   SearchInput,
   SearchForm,
-  FavoriteBtn,
+  AddToFavoriteBtn,
   GeoBtn,
 } from './Header.module';
 import { FavoritCity } from 'components/header/FavoritCity/FavoritCity';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { geoLocationByCoords } from 'API/fetchLocationByCoords';
 
 export const Header = ({ onChangeSity }) => {
   const [inputValue, setInputValue] = useState('');
-  const [city, setCity] = useState('Kyiv');
-  const [favoritCitys, setFavoritCitys] = useState(() => {
+  const [city, setCity] = useState('');
+  const [favoritCitys, setFavoritCitys] = useState([]);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(async ({ coords }) => {
+      const { latitude, longitude } = coords;
+      const result = await geoLocationByCoords(latitude, longitude);
+      setCity(result);
+      setInputValue(result);
+    });
     const localStoregeFavoritCitys = localStorage.getItem('FavoritCitys');
-    const parsedFavoritCitys = JSON.parse(localStoregeFavoritCitys);
-    if (parsedFavoritCitys && parsedFavoritCitys.length) {
-      return parsedFavoritCitys;
-    }
-    return [];
-  });
+    const parsedFavoritCitys = JSON.parse(localStoregeFavoritCitys) || [];
+    setFavoritCitys(parsedFavoritCitys);
+  }, []);
 
   const onSubmit = event => {
     event.preventDefault();
     if (inputValue) {
       setCity(inputValue);
-      setInputValue(inputValue);
     }
-
-    return;
   };
 
   const onHandleChange = event => {
     setInputValue(event.target.value);
   };
+
   const addToFavorit = () => {
-    if (favoritCitys.includes(city)) {
-      return;
+    if (!favoritCitys.includes(city)) {
+      const normolizedValue = city
+        .trim()
+        .replace(city[0], city[0].toUpperCase());
+      setFavoritCitys(prev => [...prev, normolizedValue]);
     }
-    const normolizedValue = city.trim().replace(city[0], city[0].toUpperCase());
-    setFavoritCitys(prev => [...prev, normolizedValue]);
   };
-  const onDeleteClick = name => {
-    console.log(name);
-    const index = favoritCitys.indexOf(name);
-    favoritCitys.splice(index, 1);
-    localStorage.setItem('FavoritCitys', JSON.stringify(favoritCitys));
-  };
+
   const onFavoritCityClick = name => {
     setCity(name);
     setInputValue(name);
   };
-  const onGeoClick = s => {
+
+  const onGeoClick = () => {
     navigator.geolocation.getCurrentPosition(async ({ coords }) => {
       const { latitude, longitude } = coords;
-
-      const resolt = await geoLocationByCoords(latitude, longitude);
-      setCity(resolt);
-      setInputValue(resolt);
+      const result = await geoLocationByCoords(latitude, longitude);
+      setCity(result);
+      setInputValue(result);
     });
   };
-  useEffect(() => {
-    localStorage.setItem('FavoritCitys', JSON.stringify(favoritCitys));
-  }, [favoritCitys]);
 
   useEffect(() => {
+    localStorage.setItem('FavoritCitys', JSON.stringify(favoritCitys));
     onChangeSity(city);
-  }, [city, onChangeSity]);
+  }, [favoritCitys, city, onChangeSity]);
 
   return (
     <HeaderContainer>
       <HeaderForm>
         <SearchForm onSubmit={onSubmit}>
-          <GeoBtn type="button">
-            <GpsNotFixedIcon onClick={onGeoClick} color="primary" />
+          <GeoBtn type="button" onClick={onGeoClick}>
+            <GpsNotFixedIcon
+              sx={{
+                color: '#494848',
+                '&:hover': { cursor: 'pointer', color: '#87b4ce' },
+              }}
+            />
           </GeoBtn>
           <SearchInput
             value={inputValue}
@@ -86,20 +87,22 @@ export const Header = ({ onChangeSity }) => {
             name="query"
             onInput={onHandleChange}
           />
-          <FavoriteBtn type="button" onClick={addToFavorit}>
-            <StarBorderIcon />
-          </FavoriteBtn>
+          <AddToFavoriteBtn type="button" onClick={addToFavorit}>
+            <StarBorderIcon
+              sx={{
+                color: '#494848',
+                '&:hover': { cursor: 'pointer', color: '#FF6B09' },
+              }}
+            />
+          </AddToFavoriteBtn>
         </SearchForm>
         <FavoritCity
           favoritCitysArr={favoritCitys}
+          setFavoritCitys={setFavoritCitys}
           onFavoritCityClick={onFavoritCityClick}
-          onDeleteClick={onDeleteClick}
+          city={city}
         />
       </HeaderForm>
     </HeaderContainer>
   );
 };
-//TODO запрет на добавление дефолтного города
-// при нажатии на делейт всплывет кнопка фейворит
-//сделать гео
-// сделать ховер

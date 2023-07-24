@@ -9,7 +9,7 @@ import { Circles } from 'react-loader-spinner';
 import { fetcFiveDaysWeather } from 'API/fetcFiveDaysWeather';
 
 export const App = () => {
-  const [city, setCity] = useState('Kyiv');
+  const [city, setCity] = useState('');
   const [weatherTodayArr, setweatherTodayArr] = useState(null);
   const [weatherFiveDaysArr, setWeatherFiveDaysArr] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,26 +22,31 @@ export const App = () => {
     setCity(name);
   };
 
+  const getWeatherToday = async city => {
+    const { data } = await fetchCurrentToday(city);
+    setweatherTodayArr(data);
+    setIsLoading(false);
+  };
+
+  const getWeatherFiveDays = async city => {
+    setIsLoading(true);
+
+    const data = await fetcFiveDaysWeather(city);
+    setWeatherFiveDaysArr(data);
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     fetchBcgImg(city);
     setIsLoading(true);
-    const getWeatherToday = async () => {
-      const { data } = await fetchCurrentToday(city);
-      setweatherTodayArr(data);
-      setIsLoading(false);
-    };
 
-    const getWeatherFiveDays = async () => {
-      const data = await fetcFiveDaysWeather(city);
-      setWeatherFiveDaysArr(data);
-      setIsLoading(false);
-    };
+    getWeatherToday(city);
 
-    getWeatherToday();
-
-    getWeatherFiveDays();
+    getWeatherFiveDays(city);
   }, [city]);
 
+  console.log('weatherTodayArr', weatherTodayArr);
+  console.log('weatherFiveDaysArr', weatherFiveDaysArr);
   return (
     <Container>
       <Header onChangeSity={onChangeSity} />

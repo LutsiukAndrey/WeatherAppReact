@@ -56,7 +56,7 @@ const SearchInput = styled.input`
     font-size: 14px;
   }
 `;
-const FavoriteBtn = styled.button`
+const AddToFavoriteBtn = styled.button`
   fill: #000000;
   position: absolute;
   top: 50%;
@@ -96,6 +96,6 @@ export {
   HeaderForm,
   SearchInput,
   SearchForm,
-  FavoriteBtn,
+  AddToFavoriteBtn,
   GeoBtn,
 };

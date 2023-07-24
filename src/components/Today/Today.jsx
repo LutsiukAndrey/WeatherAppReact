@@ -15,7 +15,11 @@ export const Today = ({ data, onSelectBtn }) => {
       <Section>
         <WeatherSection>
           <WeatherContetn>
-            <CurrentWeather data={data} />
+            {!data ? (
+              <h3 style={{ color: '#fff' }}>City is not found</h3>
+            ) : (
+              <CurrentWeather data={data} />
+            )}
           </WeatherContetn>
           <Navigation onSelectBtn={onSelectBtn} />
         </WeatherSection>
