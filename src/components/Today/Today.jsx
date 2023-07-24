@@ -2,7 +2,6 @@ import { CurrentWeather } from 'components/Today/CurrentWeather/CurrentWeather';
 import { LeftBottomWraper } from 'components/Today/LeftBottomWraper/LeftBottomWraper';
 import { Navigation } from 'components/Navigation/Navigation';
 import { Quote } from 'components/Today/Quote/Quote';
-import styled from 'styled-components';
 import {
   Section,
   SectionBottom,
